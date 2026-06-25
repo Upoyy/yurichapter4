@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+
+  <!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  RESPONSIVE META TAG — WAJIB ADA untuk semua ukuran device  ║
+  ║  Jangan hapus tag ini!                                       ║
+  ╚══════════════════════════════════════════════════════════════╝
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+
+  <!-- SEO & Share -->
+  <meta name="description" content="YuRi's special day!!" />
+  <meta name="theme-color" content="#C8536A" />
+
+  <!-- iOS Home Screen Icon -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+  <title>YuRi Chapter 4th❤️</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════
+       🎵  AUDIO BACKGROUND
+       ──────────────────────────────────────────────────────────
+       CARA MEMASUKKAN MUSIK:
+       1. Siapkan file musik format .mp3 (atau .ogg sebagai backup)
+       2. Letakkan file di folder yang SAMA dengan index.html
+       3. Ganti "musik-kamu.mp3" dengan nama file musikmu
+          Contoh: <source src="perfect.mp3" type="audio/mpeg">
+       4. Musik otomatis mulai saat user pertama kali klik/tap layar
+  ═══════════════════════════════════════════════════════════════ -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="Tiger_La_Flor_-_KODACHROMATIC__Lyric_Video_.mp3" type="audio/mpeg" />
+    <source src="musik-kamu.ogg" type="audio/ogg" />
+    <!-- Tambahkan format lain jika perlu -->
+  </audio>
+
+  <!-- Tombol Play/Pause Musik (pojok kanan bawah) -->
+  <button id="music-btn" class="music-btn" aria-label="Play atau Pause Musik" title="Play / Pause Musik">
+    <span id="music-icon">♪</span>
+  </button>
+
+  <!-- ══════════════════════════════════════════════════════════
+       🌸  CANVAS ANIMASI KELOPAK BUNGA
+       (Dirender oleh JavaScript — jangan hapus)
+  ═══════════════════════════════════════════════════════════════ -->
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
+
+  <!-- ══════════════════════════════════════════════════════════
+       🏠  SECTION 1 — HERO (Halaman Pembuka)
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="hero" class="hero">
+
+    <!-- Tiga cincin orbit dekoratif berputar -->
+    <div class="orbit-ring orbit-ring--sm"  aria-hidden="true"><span class="orbit-heart">❤️</span></div>
+    <div class="orbit-ring orbit-ring--md"  aria-hidden="true"><span class="orbit-heart">🌸</span></div>
+    <div class="orbit-ring orbit-ring--lg"  aria-hidden="true"><span class="orbit-heart">✨</span></div>
+
+    <div class="hero__content">
+      <!-- ✏️ Ubah label di bawah sesuai kebutuhan -->
+      <p class="hero__label">June, 26th 2026❤️</p>
+
+      <!-- ✏️ Ubah judul utama -->
+      <h1 class="hero__title">For Yudith <em>Rahmadiah</em><br /></h1>
+
+      <!-- ✏️ Ubah subtitle / tagline -->
+      <p class="hero__sub">-My forever date ❤️-</p>
+    </div>
+
+    <!-- Panah scroll ke bawah -->
+    <div class="scroll-cue" aria-hidden="true">
+      <span>Scroll dong bb❤️</span>
+      <div class="scroll-arrow"></div>
+  
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       💬  SECTION 2 — QUOTE STRIP (Kutipan Romantis)
+  ═══════════════════════════════════════════════════════════════ -->
+  <div id="quote-strip" class="quote-strip">
+    <blockquote class="quote-strip__text js-reveal-quote">
+      <!--
+        ✏️ Ganti kutipan di bawah dengan kata-katamu sendiri
+           atau kutipan favorit kalian berdua
+      -->
+      "loving you is always automatic .<br />
+       my love, your love, our love. oh our love is so classic "
+      <cite class="quote-strip__cite">-Tiger La Flor / Kodakchromatic-</cite>
+    </blockquote>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       💌  SECTION 3 — SURAT KECIL
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="section js-reveal" id="letter">
+    <p class="section-label">Surat Kecil Untukmu</p>
+
+    <div class="letter-card">
+      <div class="letter-card__deco" aria-hidden="true">❝</div>
+
+      <!--
+        ✏️ Ubah tanggal anniversary kalian
+      -->
+      <p class="letter-card__date">26 Juni 2022 — 26 Juni 2026</p>
+
+      <div class="letter-card__body">
+        <!--
+          ✏️ Ganti seluruh isi surat dengan kata-katamu sendiri.
+             Setiap <p> adalah satu paragraf baru.
+        -->
+        <p>HI BABYY!!</p>
+        <p>
+          It's been 4 years since the day we decide to be together, and I never regret my decision to be with you since the first day.
+          I can't imagine how hard life would be without you. And what would i be without you in this 4 years. 
+          There will be no Bagus Panca Rian like this without you.
+        </p>
+        <p>
+          You are not just my partner. you are my home and im your home. someone who will be by your side no matter what happen to you and this world
+          Aku akan selalu jadi Rian yang kamu kenal dan aku juga berharap kamu akan selalu jadi Yudith yang mas rian kenal yaa sayaangg
+          kalo hidup bisa di ulang terus menerus, mas rian pasti pilih kamu lagi buat jadi pasangan akuuu
+          dan kalo ada banyak dunia di alam semesta ini aku pasti bakal pilih kamu jadi pasangan akuuu mwehehehehehe🫣❤️
+        </p>
+        <p>
+          Terimakasih yaa sayaangg karena kamu sudah pilih aku buat jadi pasangan kamuu babyy, 
+          walaupun banyak hal yang aku perbuat menyakiti kamu tapi kamu terus pilih aku buat jadi pasangan kamu sayaangg
+          , semua sifat aku yang masih suka ke kanak-kanakan, suka bertindak semaunya, suka nyepelein dan suka buat kamu kesel
+          tapi kamu tetap tulus mencintai aku. mau bilang terimakasih ga bakal pernah bisa buat balas semua ketulusan dan pengorbanan kamu sayangg🥹🥹❤️❤️
+          dan aku selalu berterimakasih dan bersyukur sama Allah babyy karenaa yaa sudah jadikan kamu pasangan aku you will always be my love and my eternal date forever and ever baby🥹🥹❤️❤️ 
+        </p>
+        <p>
+          I wish there is a space in this world that can describe how much i love you and how im so grateful to be you man and you be my girl babyy.
+          and i wish there is a space that can fit all of my love and my adiction for loving you babyy
+          Please be my forever be my date and be my home babyy, cause i will always be yours sayangg🥹🥹❤️❤️
+        </p>
+        <p>
+          I love you Yudith Rahmadiah, and i will always love you, i lovee you more than how you love me, and there is no reason for me to stop loving you and there is no other couple that can beat my love to you sayaangg
+          ❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️
+        </p>
+
+        *p.s: i love you more than how you love nicholas saputra, and el putra sarira hehehehhehehe❤️❤️
+      </div>
+
+      <!--
+        ✏️ Ganti "Nama Kamu" dengan namamu
+      -->
+      <p class="letter-card__sign">
+          Your forever date, <br /><strong>Mas Rian</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       🔄  SECTION 4 — FOTO MELINGKAR (Rotating Photo Ring)
+  ═══════════════════════════════════════════════════════════════ -->
+  <section class="section js-reveal" id="photos">
+    <p class="section-label">4 years with you</p>
+
+    <!--
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  📸  CARA MEMASUKKAN FOTO KE CINCIN PUTAR                  ║
+    ╠══════════════════════════════════════════════════════════════╣
+    ║  Ada 10 slot foto (p1 s/d p10).                            ║
+    ║                                                             ║
+    ║  SEBELUM (placeholder emoji):                               ║
+    ║    <div class="photo-slot p1">🌸</div>                     ║
+    ║                                                             ║
+    ║  SESUDAH (dengan foto nyata):                               ║
+    ║    <div class="photo-slot p1">                             ║
+    ║      <img src="foto1.jpg" alt="Foto 1" />                  ║
+    ║    </div>                                                   ║
+    ║                                                             ║
+    ║  TIPS:                                                      ║
+    ║  ✔ Foto persegi (1:1) → hasilnya paling bulat sempurna    ║
+    ║  ✔ Letakkan foto di folder yang sama dengan index.html     ║
+    ║  ✔ Format: .jpg / .png / .webp / .gif                     ║
+    ╚══════════════════════════════════════════════════════════════╝
+    -->
+
+    <div class="ring-stage" id="ring-stage">
+
+      <!-- Pusat cincin — ikon hati besar -->
+      <div class="ring-center" aria-hidden="true">
+        <img src="foto/Screenshot_20180916-191942(1).jpg" alt="Foto 0" />
+      </div>
+
+      <!-- Cincin Dalam: 4 foto, berputar searah jarum jam -->
+      <div class="ring-orbit ring-orbit--inner" id="orbit-inner">
+        <div class="photo-slot p1">
+          <img src="foto/1691652604267.jpg" alt="Foto 1"/>
+        </div>   <!-- → <img src="foto1.jpg" alt="Foto 1"> -->
+        <div class="photo-slot p2">
+          <img src="foto/IMG_20230816_153447.jpg" alt="Foto 2"/>
+        </div>   <!-- → <img src="foto2.jpg" alt="Foto 2"> -->
+        <div class="photo-slot p3">
+          <img src="foto/IMG-20260601-WA0020.jpg" alt="Foto 3"/>
+        </div>   <!-- → <img src="foto3.jpg" alt="Foto 3"> -->
+        <div class="photo-slot p4">
+          <img src="foto/PXL_20220731_171622625(1).jpg" alt="Foto 4"/>
+        </div>   <!-- → <img src="foto4.jpg" alt="Foto 4"> -->
+      </div>
+
+      <!-- Cincin Luar: 6 foto, berputar berlawanan arah -->
+      <div class="ring-orbit ring-orbit--outer" id="orbit-outer">
+        <div class="photo-slot p5">
+          <img src="foto/1762003575229.jpg" alt="Foto 5"/>
+        </div>   <!-- → <img src="foto5.jpg" alt="Foto 5"> -->
+        <div class="photo-slot p6">
+          <img src="foto/CIMG0043.JPG" alt="Foto 6"/>
+        </div>   <!-- → <img src="foto6.jpg" alt="Foto 6"> -->
+        <div class="photo-slot p7">
+          <img src="foto/1751309057358.jpg" alt="Foto 7"/>
+        </div>   <!-- → <img src="foto7.jpg" alt="Foto 7"> -->
+        <div class="photo-slot p8">
+          <img src="foto/1722012876421.jpg" alt="Foto 8"/>
+        </div>   <!-- → <img src="foto8.jpg" alt="Foto 8"> -->
+        <div class="photo-slot p9">
+          <img src="foto/1762003558413.jpg" alt="Foto 9"/>
+        </div>   <!-- → <img src="foto9.jpg" alt="Foto 9"> -->
+        <div class="photo-slot p10">
+          <img src="foto/1770148184921.jpg" alt="Foto 10"/>
+        </div>  <!-- → <img src="foto10.jpg" alt="Foto 10"> -->
+      </div>
+
+    </div><!-- /ring-stage -->
+
+    <!--
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  📸  CARA MEMASUKKAN FOTO KE GALERI GRID                   ║
+    ╠══════════════════════════════════════════════════════════════╣
+    ║  SEBELUM:  <div class="g-item">🌸</div>                    ║
+    ║  SESUDAH:  <div class="g-item">                            ║
+    ║              <img src="galeri1.jpg" alt="Momen kita">      ║
+    ║            </div>                                           ║
+    ║                                                             ║
+    ║  Tambah atau hapus .g-item sesuai jumlah foto yang kamu    ║
+    ║  miliki. Grid otomatis menyesuaikan jumlah foto.           ║
+    ╚══════════════════════════════════════════════════════════════╝
+    -->
+    <div class="gallery-grid">
+      <div class="g-item">
+        <img src="foto/CIMG0154.JPG" alt="Momen kita 1" />
+      </div>   <!-- → <img src="galeri1.jpg" alt=""> -->
+      <div class="g-item">
+        <img src="foto/CIMG6751.JPG" alt="Momen kita 2" />
+      </div>   <!-- → <img src="galeri2.jpg" alt=""> -->
+      <div class="g-item">
+        <img src="foto/1778737383335.jpg" alt="Momen kita 3" />
+      </div>   <!-- → <img src="galeri3.jpg" alt=""> -->
+      <div class="g-item">
+        <img src="foto/1777998736876.jpg" alt="Momen kita 4" />
+      </div>   <!-- → <img src="galeri4.jpg" alt=""> -->
+      <div class="g-item">
+        <img src="foto/1777570062912.jpg" alt="Momen kita 5" />
+      </div>   <!-- → <img src="galeri5.jpg" alt=""> -->
+      <div class="g-item">
+        <img src="foto/1762003588914.jpg" alt="Momen kita 6" />
+      </div>   <!-- → <img src="galeri6.jpg" alt=""> -->
+      <div class="g-item">
+        <img src="foto/1729069331125.jpg" alt="Momen kita 7" />
+      </div>   <!-- → <img src="galeri1.jpg" alt=""> -->
+      <div class="g-item">
+        <img src="foto/1773853975888.jpg" alt="Momen kita 8" />
+      </div>   <!-- → <img src="galeri2.jpg" alt=""> -->
+      <div class="g-item">
+        <img src="foto/Screenshot_20260602_140642_Instagram.jpg" alt="Momen kita 9" />
+      </div>   <!-- → <img src="galeri3.jpg" alt=""> -->
+      <div class="g-item">
+        <img src="foto/1772219172841.jpg" alt="Momen kita 10" />
+      </div>   <!-- → <img src="galeri4.jpg" alt=""> -->
+      <div class="g-item">
+        <img src="foto/1720363075309.jpg" alt="Momen kita 11" />
+      </div>   <!-- → <img src="galeri5.jpg" alt=""> -->
+      <div class="g-item">
+        <img src="foto/20260118_210423.jpg" alt="Momen kita 12" />
+      </div>   <!-- → <img src="galeri6.jpg" alt=""> -->
+    </div>
+
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       📅  SECTION 5 — TIMELINE PERJALANAN
+  ═══════════════════════════════════════════════════════════════ -->
+  
+  <!-- ══════════════════════════════════════════════════════════
+       🌟  SECTION 6 — CLOSING BANNER (Penutup)
+  ═══════════════════════════════════════════════════════════════ -->
+  <div id="closing" class="closing">
+    <!-- Angka "4" dekoratif di latar belakang -->
+    <div class="closing__bg-num" aria-hidden="true">4</div>
+
+    <!--
+      ✏️ Ganti "Sayang" dengan nama pacarmu
+    -->
+    <h2 class="closing__title js-reveal">YuRi Chapter 4th❤️</h2>
+    <p class="closing__text js-reveal">
+      You turn life into endless summer babyy❤️❤️
+    </p>
+    <div class="closing__hearts js-reveal" aria-hidden="true">❤️ 💕 ❤️</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       📜  JAVASCRIPT — File JS terpisah (wajib di bagian bawah)
+  ═══════════════════════════════════════════════════════════════ -->
+  <script src="script.js"></script>
+
+</body>
+</html>

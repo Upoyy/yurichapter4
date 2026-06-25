@@ -1,0 +1,894 @@
+/*
+╔══════════════════════════════════════════════════════════════════╗
+║              ANNIVERSARY WEBSITE — style.css                    ║
+╠══════════════════════════════════════════════════════════════════╣
+║  STRUKTUR FILE INI:                                             ║
+║  1.  CSS Custom Properties (Variabel Warna & Ukuran)           ║
+║  2.  Reset & Base                                               ║
+║  3.  Komponen Musik                                             ║
+║  4.  Canvas Kelopak Bunga                                       ║
+║  5.  Hero Section                                               ║
+║  6.  Quote Strip                                                ║
+║  7.  Section Wrapper & Label                                    ║
+║  8.  Surat Kecil                                                ║
+║  9.  Foto Melingkar (Ring + Gallery Grid)                       ║
+║  10. Timeline                                                   ║
+║  11. Closing Banner                                             ║
+║  12. Animasi & Keyframes                                        ║
+║  13. RESPONSIVE — semua breakpoint device                       ║
+║        • Mobile  S  : max 360px                                 ║
+║        • Mobile  M  : max 480px                                 ║
+║        • Mobile  L  : max 600px                                 ║
+║        • Tablet     : max 768px                                 ║
+║        • Tablet  L  : max 1024px                                ║
+║        • Desktop    : min 1025px                                ║
+║        • Wide       : min 1440px                                ║
+║        • 4K / UHD   : min 2560px                                ║
+║  14. Aksesibilitas (prefers-reduced-motion, focus)              ║
+╚══════════════════════════════════════════════════════════════════╝
+*/
+
+
+/* ════════════════════════════════════════════════════════════════
+   1. CSS CUSTOM PROPERTIES (VARIABEL)
+   ────────────────────────────────────────────────────────────────
+   Ubah nilai di sini untuk mengganti tema warna secara global.
+════════════════════════════════════════════════════════════════ */
+:root {
+  /* Palet Warna */
+  --clr-rose:      #C8536A;   /* Warna utama (merah mawar) */
+  --clr-blush:     #F2C4CE;   /* Merah muda pucat */
+  --clr-petal:     #FDF0F3;   /* Latar sangat terang */
+  --clr-ivory:     #FDFAF6;   /* Latar utama */
+  --clr-gold:      #C9A96E;   /* Aksen emas */
+  --clr-charcoal:  #2E2028;   /* Teks utama gelap */
+  --clr-muted:     #7A5C64;   /* Teks sekunder */
+  --clr-white:     #FFFFFF;
+
+  /* Tipografi */
+  --font-display:  'Cormorant Garamond', Georgia, serif;
+  --font-body:     'Montserrat', 'Segoe UI', sans-serif;
+
+  /* Skala Ukuran Font — clamp(min, preferred, max) untuk fluid typography */
+  --fs-hero:     clamp(3rem, 10vw + 0.5rem, 8rem);
+  --fs-h2:       clamp(1.8rem, 4vw, 3.2rem);
+  --fs-h3:       clamp(1.1rem, 2.5vw, 1.4rem);
+  --fs-quote:    clamp(1.2rem, 3.5vw, 2rem);
+  --fs-body:     clamp(0.9rem, 2vw, 1.05rem);
+  --fs-small:    clamp(0.7rem, 1.5vw, 0.78rem);
+  --fs-letter:   clamp(1rem, 2.2vw, 1.22rem);
+
+  /* Spacing */
+  --space-xs:    clamp(8px,  2vw, 16px);
+  --space-sm:    clamp(16px, 3vw, 24px);
+  --space-md:    clamp(24px, 5vw, 48px);
+  --space-lg:    clamp(48px, 8vw, 90px);
+  --space-xl:    clamp(72px, 12vw, 130px);
+
+  /* Border Radius */
+  --radius-sm:   4px;
+  --radius-md:   12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 8px 48px rgba(200, 83, 106, 0.09);
+  --shadow-dot:  0 2px 12px rgba(200, 83, 106, 0.35);
+  --shadow-ring: 0 0 0 8px var(--clr-blush), 0 0 0 16px rgba(200,83,106,.12);
+  --shadow-photo: 0 4px 20px rgba(0, 0, 0, 0.18);
+
+  /* Transisi */
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.9s ease;
+
+  /* Ring Dimensions (dinamis via JS, tapi default CSS di sini) */
+  --ring-size:     440px;
+  --slot-size:     108px;
+  --slot-half:     54px;   /* slot-size / 2 */
+  --radius-inner:  47%;
+  --radius-outer:  44%;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   2. RESET & BASE
+════════════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Mencegah layout shift akibat scrollbar muncul/hilang */
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--clr-charcoal);
+  background-color: var(--clr-ivory);
+  overflow-x: hidden;
+  /* Line-height nyaman di semua ukuran */
+  line-height: 1.65;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  /* Cegah select pada gambar */
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Aksesibilitas: focus ring yang terlihat */
+:focus-visible {
+  outline: 2px solid var(--clr-rose);
+  outline-offset: 3px;
+}
+
+/* Utility: section container */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-lg) var(--space-md);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   3. KOMPONEN MUSIK
+════════════════════════════════════════════════════════════════ */
+.music-btn {
+  position: fixed;
+  bottom: clamp(16px, 4vw, 28px);
+  right:  clamp(16px, 4vw, 28px);
+  z-index: 999;
+
+  background: var(--clr-rose);
+  color: var(--clr-white);
+  border: none;
+  border-radius: var(--radius-full);
+
+  /* Ukuran adaptif: lebih kecil di mobile */
+  width:  clamp(44px, 10vw, 56px);
+  height: clamp(44px, 10vw, 56px);
+  font-size: clamp(18px, 5vw, 24px);
+
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(200, 83, 106, .45);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Touch target minimum 44×44px (WCAG 2.5.5) */
+  touch-action: manipulation;
+}
+
+.music-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 28px rgba(200, 83, 106, .65);
+}
+
+.music-btn.playing {
+  animation: pulse-btn 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-btn {
+  0%, 100% { box-shadow: 0 4px 20px rgba(200, 83, 106, .45); }
+  50%       { box-shadow: 0 4px 36px rgba(200, 83, 106, .9); }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   4. CANVAS KELOPAK BUNGA
+════════════════════════════════════════════════════════════════ */
+#petals-canvas {
+  position: fixed;
+  inset: 0;          /* shorthand untuk top/right/bottom/left: 0 */
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   5. HERO SECTION
+════════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100svh;   /* svh: small viewport height — aman di mobile browser */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-lg) var(--space-md);
+  background: linear-gradient(
+    160deg,
+    var(--clr-petal)  0%,
+    var(--clr-ivory) 55%,
+    var(--clr-petal) 100%
+  );
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Tiga cincin orbit dekoratif */
+.orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(200, 83, 106, .18);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: orbit-spin 28s linear infinite;
+  pointer-events: none;
+}
+
+.orbit-ring--sm { width: clamp(200px, 45vw, 340px); height: clamp(200px, 45vw, 340px); }
+.orbit-ring--md { width: clamp(280px, 62vw, 490px); height: clamp(280px, 62vw, 490px); animation-duration: 42s; animation-direction: reverse; }
+.orbit-ring--lg { width: clamp(360px, 78vw, 640px); height: clamp(360px, 78vw, 640px); animation-duration: 60s; }
+
+.orbit-heart {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(14px, 3vw, 22px);
+  filter: drop-shadow(0 2px 8px rgba(200, 83, 106, .5));
+}
+
+@keyframes orbit-spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Konten Hero */
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+}
+
+.hero__label {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: clamp(.18em, 1vw, .32em);
+  text-transform: uppercase;
+  color: var(--clr-rose);
+  margin-bottom: var(--space-sm);
+  opacity: 0;
+  animation: fadeUp .9s .2s forwards;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--clr-charcoal);
+  opacity: 0;
+  animation: fadeUp 1s .5s forwards;
+  /* Cegah overflow di layar kecil */
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.hero__title em {
+  font-style: italic;
+  color: var(--clr-rose);
+}
+
+.hero__sub {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 2.8vw, 1.55rem);
+  color: var(--clr-muted);
+  margin-top: var(--space-sm);
+  opacity: 0;
+  animation: fadeUp 1s .85s forwards;
+  max-width: 55ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Scroll Cue */
+.scroll-cue {
+  position: absolute;
+  bottom: clamp(20px, 5vh, 36px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--clr-muted);
+  font-size: var(--fs-small);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeUp .8s 2.2s forwards;
+  z-index: 2;
+}
+
+.scroll-arrow {
+  width: 1px;
+  height: clamp(30px, 5vh, 48px);
+  background: linear-gradient(to bottom, var(--clr-rose), transparent);
+  animation: scroll-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse {
+  0%, 100% { opacity: .4; transform: scaleY(1); }
+  50%       { opacity: 1;  transform: scaleY(1.25); }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   6. QUOTE STRIP
+════════════════════════════════════════════════════════════════ */
+.quote-strip {
+  background: var(--clr-rose);
+  color: var(--clr-white);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Lingkaran dekoratif di latar belakang */
+.quote-strip::before,
+.quote-strip::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .06);
+  pointer-events: none;
+}
+.quote-strip::before {
+  width: clamp(200px, 50vw, 420px);
+  height: clamp(200px, 50vw, 420px);
+  top: -30%;
+  right: -10%;
+}
+.quote-strip::after {
+  width: clamp(140px, 35vw, 300px);
+  height: clamp(140px, 35vw, 300px);
+  bottom: -40%;
+  left: -5%;
+}
+
+.quote-strip__text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--fs-quote);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.55;
+  position: relative;
+  z-index: 1;
+
+  /* Reveal on scroll — dikendalikan JS */
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.quote-strip__text.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.quote-strip__cite {
+  display: block;
+  margin-top: 16px;
+  font-size: var(--fs-small);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .72);
+  font-style: normal;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   7. SECTION LABEL
+════════════════════════════════════════════════════════════════ */
+.section-label {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--clr-rose);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-md);
+}
+
+.section-label::before,
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+}
+.section-label::before {
+  background: linear-gradient(to right, transparent, var(--clr-blush));
+}
+.section-label::after {
+  background: linear-gradient(to left, transparent, var(--clr-blush));
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   8. SURAT KECIL
+════════════════════════════════════════════════════════════════ */
+.letter-card {
+  background: var(--clr-white);
+  border: 1px solid #f0dfe3;
+  border-radius: var(--radius-sm);
+  padding: clamp(28px, 6vw, 64px);
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.letter-card__deco {
+  position: absolute;
+  top: clamp(-20px, -3vw, -26px);
+  left: clamp(20px, 5vw, 40px);
+  font-size: clamp(50px, 12vw, 90px);
+  color: var(--clr-blush);
+  font-family: Georgia, serif;
+  line-height: 1;
+  user-select: none;
+}
+
+.letter-card__date {
+  font-size: var(--fs-small);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+  margin-bottom: var(--space-md);
+}
+
+.letter-card__body {
+  font-family: var(--font-display);
+  font-size: var(--fs-letter);
+  line-height: 1.9;
+  color: var(--clr-charcoal);
+}
+
+.letter-card__body p {
+  margin-bottom: 1em;
+}
+
+.letter-card__sign {
+  margin-top: var(--space-md);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  color: var(--clr-rose);
+  line-height: 1.7;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   9. FOTO MELINGKAR
+════════════════════════════════════════════════════════════════ */
+#photos {
+  text-align: center;
+}
+
+/* Stage: kotak persegi tempat semua cincin berada */
+.ring-stage {
+  position: relative;
+  /* Ukuran adaptif: kecil di mobile, besar di desktop */
+  width:  clamp(280px, 80vw, 480px);
+  height: clamp(280px, 80vw, 480px);
+  margin: 0 auto var(--space-lg);
+}
+
+/* Ikon hati di tengah cincin */
+.ring-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Ukuran TETAP — tidak diubah oleh JS */
+  width:  72px;
+  height: 72px;
+  background: var(--clr-rose);
+  border-radius: 50% !important;   /* Paksa bulat sempurna */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: var(--shadow-ring);
+  z-index: 10;
+  flex-shrink: 0;
+  animation: heartbeat 2.2s ease-in-out infinite;
+}
+
+/* Pastikan tidak ada img di dalam ring-center yang merusak bentuk */
+.ring-center img {
+  display: none;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  14%       { transform: translate(-50%, -50%) scale(1.13); }
+  28%       { transform: translate(-50%, -50%) scale(1); }
+  42%       { transform: translate(-50%, -50%) scale(1.08); }
+}
+
+/* Cincin berputar */
+.ring-orbit {
+  position: absolute;
+  inset: 0;
+  animation: orbit-spin 18s linear infinite;
+}
+
+.ring-orbit--outer {
+  animation-direction: reverse;
+  animation-duration: 24s;
+}
+
+/* Slot foto individual (bulat) */
+/* PENTING: width & height diatur penuh oleh JS (positionSlots()) */
+.photo-slot {
+  position: absolute;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  border: 3px solid var(--clr-white);
+  box-shadow: var(--shadow-photo);
+  background: var(--clr-blush);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.photo-slot img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 50% !important;
+  display: block;
+  pointer-events: none;
+}
+
+/* Counter-rotate agar foto tetap tegak saat cincin berputar */
+.ring-orbit--inner .photo-slot {
+  animation: counter-spin 18s linear infinite;
+}
+.ring-orbit--outer .photo-slot {
+  animation: orbit-spin 24s linear infinite;
+}
+
+@keyframes counter-spin {
+  to { transform: rotate(-360deg); }
+}
+
+/*
+  Posisi slot foto di dalam cincin.
+  Dihitung menggunakan JS (lihat script.js fungsi positionSlots())
+  agar otomatis responsif terhadap ukuran .ring-stage.
+  Kelas p1–p10 diset via JavaScript attribute style, bukan CSS di sini.
+*/
+
+
+/* ─── Gallery Grid ─── */
+.gallery-grid {
+  display: grid;
+  /* auto-fill: isi sebanyak kolom yang muat; min 150px per kolom */
+  grid-template-columns: repeat(auto-fill, minmax(clamp(130px, 28vw, 200px), 1fr));
+  gap: clamp(8px, 2vw, 14px);
+  margin-top: var(--space-md);
+}
+
+.g-item {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--clr-blush);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  position: relative;
+}
+
+.g-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+.g-item:hover img {
+  transform: scale(1.07);
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   11. CLOSING BANNER
+════════════════════════════════════════════════════════════════ */
+.closing {
+  background: linear-gradient(135deg, var(--clr-charcoal) 0%, #3D2535 100%);
+  color: var(--clr-white);
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Angka besar dekoratif di latar */
+.closing__bg-num {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: clamp(120px, 35vw, 280px);
+  font-weight: 300;
+  color: var(--clr-rose);
+  opacity: .1;
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.closing__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 300;
+  margin-bottom: var(--space-sm);
+  position: relative;
+}
+
+.closing__text {
+  font-size: clamp(.88rem, 2vw, 1rem);
+  color: rgba(255, 255, 255, .7);
+  max-width: 52ch;
+  margin: 0 auto;
+  line-height: 1.75;
+  position: relative;
+}
+
+.closing__hearts {
+  margin-top: var(--space-md);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  letter-spacing: clamp(8px, 2vw, 14px);
+  position: relative;
+  animation: float-hearts 3s ease-in-out infinite;
+}
+
+@keyframes float-hearts {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   12. ANIMASI UMUM & KEYFRAMES
+════════════════════════════════════════════════════════════════ */
+
+/* Animasi masuk dari bawah */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Reveal on scroll — kelas default (sebelum visible) */
+.js-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.js-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   13. RESPONSIVE — BREAKPOINTS SEMUA DEVICE
+   ────────────────────────────────────────────────────────────────
+
+   Hierarchy (mobile-first approach):
+   Default styles → Mobile (ditentukan di atas)
+   @media min-width: tablet ke atas
+   @media max-width: untuk override spesifik device kecil
+
+════════════════════════════════════════════════════════════════ */
+
+/* ── Mobile S: layar sangat kecil (≤ 360px) ── */
+@media screen and (max-width: 360px) {
+  .hero__title {
+    font-size: clamp(2.4rem, 14vw, 3.2rem);
+  }
+  .hero__label {
+    letter-spacing: .12em;
+    font-size: .65rem;
+  }
+  .orbit-ring--lg {
+    display: none; /* Sembunyikan cincin terluar agar tidak overflow */
+  }
+  .letter-card {
+    padding: 24px 18px;
+  }
+  .letter-card__deco {
+    font-size: 44px;
+    top: -16px;
+    left: 14px;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Mobile M: 361px – 480px ── */
+@media screen and (min-width: 361px) and (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Mobile L / Large Phone: 481px – 600px ── */
+@media screen and (min-width: 481px) and (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── Tablet Portrait: 601px – 768px ── */
+@media screen and (min-width: 601px) and (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .section {
+    padding: var(--space-lg) var(--space-lg);
+  }
+}
+
+/* ── Tablet Landscape / Small Laptop: 769px – 1024px ── */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  #timeline {
+    max-width: 720px;
+  }
+}
+
+/* ── Desktop: 1025px ke atas ── */
+@media screen and (min-width: 1025px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+  .section {
+    padding: var(--space-xl) var(--space-md);
+  }
+  /* Hover hanya di perangkat yang punya pointer (bukan touchscreen) */
+  @media (hover: hover) {
+    .g-item:hover img {
+      transform: scale(1.08);
+    }
+  }
+}
+
+/* ── Wide Screen: 1440px ke atas ── */
+@media screen and (min-width: 1440px) {
+  :root {
+    --ring-size: 560px;
+    --slot-size: 128px;
+  }
+  .section {
+    max-width: 1000px;
+  }
+  .letter-card {
+    padding: 72px 80px;
+  }
+}
+
+/* ── 4K / UHD: 2560px ke atas ── */
+@media screen and (min-width: 2560px) {
+  :root {
+    --ring-size: 700px;
+    --slot-size: 152px;
+  }
+  body {
+    font-size: 1.15rem;
+  }
+  .section {
+    max-width: 1200px;
+  }
+}
+
+/* ── Landscape orientation di mobile ── */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: 100vw; /* Gunakan lebar sebagai acuan di landscape */
+    padding: var(--space-sm) var(--space-md);
+  }
+  .scroll-cue {
+    display: none;
+  }
+  .orbit-ring--md,
+  .orbit-ring--lg {
+    display: none;
+  }
+}
+
+/* ── High-DPI / Retina Display ── */
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+       screen and (min-resolution: 192dpi) {
+  /* Foto akan terlihat lebih tajam karena browser otomatis pakai resolusi tinggi */
+  .photo-slot img,
+  .g-item img {
+    image-rendering: auto;
+  }
+}
+
+/* ── Print (jika dicetak) ── */
+@media print {
+  #petals-canvas,
+  .music-btn,
+  .scroll-cue,
+  .orbit-ring {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .hero {
+    min-height: auto;
+    padding: 40px 20px;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   14. AKSESIBILITAS
+════════════════════════════════════════════════════════════════ */
+
+/*
+  prefers-reduced-motion:
+  Pengguna yang sensitif terhadap animasi bisa menonaktifkannya
+  dari pengaturan sistem. Kita hormati preferensi itu.
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ring-orbit,
+  .ring-orbit--outer,
+  .ring-center,
+  .closing__hearts,
+  .orbit-ring,
+  .music-btn.playing {
+    animation: none !important;
+  }
+}
+
+/* Sembunyikan elemen dekoratif dari screen reader */
+[aria-hidden="true"] {
+  pointer-events: none;
+}
